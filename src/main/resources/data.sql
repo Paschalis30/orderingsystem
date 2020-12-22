@@ -1,0 +1,1 @@
+insert into Salad values(0,2.5,'tzatziki',1)
