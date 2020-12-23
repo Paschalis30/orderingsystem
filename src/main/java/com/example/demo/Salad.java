@@ -21,9 +21,12 @@ public class Salad {
 	String name;
 	@Column(name="Qty")
 	int Qty;
-	
-	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public double getPriceUnit() {
 		return priceUnit;
 	}
@@ -44,8 +47,12 @@ public class Salad {
 	}
 	@Override
 	public String toString() {
-		return "Order [priceUnit=" + priceUnit + ", name=" + name + ", Qty=" + Qty + "]";
+		return "Salad [id=" + id + ", priceUnit=" + priceUnit + ", name=" + name + ", Qty=" + Qty + "]";
 	}
+	
+	
+	
+
 
 	
 	
