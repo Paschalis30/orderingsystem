@@ -1,15 +1,19 @@
 package com.example.demo;
 
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,10 +61,10 @@ public class SpringController {
 	}
 	
 	
-	@GetMapping("/")
-	public String login(){
-		return "authenticated successfully" ;
-	}
+//	@GetMapping("/")
+//	public String login(){
+//		return "authenticated successfully" ;
+//	}
 	@JsonIgnore
 	@PostMapping("/register")
 	public  String User(@RequestBody User User) {
@@ -69,13 +73,23 @@ public class SpringController {
 		
 	}
 	
-//	@JsonIgnore
-//	@GetMapping({ "/User/{username}/{password}" })
-//	public List<User> login(@PathVariable String username,@PathVariable int password) {
-//		
-//		return user.findByUsernameAndPassword(username, password);
-//	}
+	@JsonIgnore
+	@GetMapping({ "/User/{username}/{password}/{role}" })
+	public List<User> login(@PathVariable String username,@PathVariable int password,@PathVariable String role) {
+		
+		return user.findByUsernameAndPasswordAndRole(username, password,role);
+	}
 	
-	 
+	@JsonIgnore
+	@GetMapping("/allusers")
+	public Iterable<User> getUsers(){
+		return  user.findAll(); //select * from salad
+	}
+	@JsonIgnore
+	@GetMapping({ "/findByUsername/{username}" })
+	public List<User> findByUsername(@PathVariable String username) {
+		
+		return user.findByUsername(username);
+	}
 	
 }
