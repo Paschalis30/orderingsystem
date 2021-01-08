@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,5 +91,19 @@ public class SpringController {
 		
 		return user.findByUsername(username);
 	}
+	
+	@JsonIgnore
+@GetMapping("/query/{priceUnit}/{name}")
+public List<Object> getStudentBynameOfSubject(@PathVariable double priceUnit,@PathVariable String name){
+		
+	return salad.findByPriceUnitAndName(priceUnit,name);
+}
+	
+//	@JsonIgnore
+//@GetMapping("/query2/{role}")
+//public List<Object> getByRole(@PathVariable String role){
+//		
+//	return salad.findByRole(role);
+//}
 	
 }
